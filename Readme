@@ -1,0 +1,31 @@
+Proje Yapısı ve Dosyaların İşlevleri
+app.js Dosyası:
+İşlevi: Uygulamanın ana dosyasıdır. Express.js uygulamasını başlatır, Pug şablon motorunu ayarlar ve rotaları tanımlar.
+Özellikler:
+Express.js framework’ünü kullanarak bir sunucu oluşturur.
+Pug şablon motorunu kullanarak HTML dosyalarını render eder.
+Rota dosyalarını (routes) kullanarak gelen istekleri yönlendirir.
+controllers/ Klasörü:
+İşlevi: Uygulamanın iş mantığını içerir. Her bir rota için gerekli işlemleri yapar ve sonuçları döner.
+Özellikler:
+mainController.js Dosyası:
+home ve about fonksiyonları, ana sayfa ve hakkında sayfası için gerekli verileri hazırlar ve ilgili Pug şablonlarını render eder.
+routes/ Klasörü:
+İşlevi: Uygulamanın rotalarını tanımlar. Gelen HTTP isteklerini uygun kontrolör fonksiyonlarına yönlendirir.
+Özellikler:
+mainRoutes.js Dosyası:
+Ana sayfa (/) ve hakkında sayfası (/about) rotalarını tanımlar ve bu rotalar için mainController fonksiyonlarını çağırır.
+views/ Klasörü:
+İşlevi: Uygulamanın şablon dosyalarını içerir. Pug dosyaları burada bulunur ve HTML çıktıları oluşturulur.
+Özellikler:
+layout.pug Dosyası:
+Tüm sayfalar için ortak olan HTML yapısını tanımlar. Diğer Pug dosyaları bu layout’u genişletir.
+index.pug ve about.pug Dosyaları:
+layout.pug dosyasını genişleterek, ana sayfa ve hakkında sayfası için özel içerikleri tanımlar.
+Neden routes ve controllers Kullanıyoruz?
+Routes (Rotalar):
+İşlevi: Uygulamanın URL’lerini tanımlar ve bu URL’lere gelen istekleri uygun kontrolör fonksiyonlarına yönlendirir.
+Neden İhtiyaç Var: Uygulamanın farklı URL’lere gelen istekleri yönetebilmesi için rotalar gereklidir. Bu sayede, her bir URL için hangi işlemlerin yapılacağını belirleyebiliriz.
+Controllers (Kontrolörler):
+İşlevi: Uygulamanın iş mantığını içerir. Gelen istekleri işler, gerekli verileri hazırlar ve sonuçları döner.
+Neden İhtiyaç Var: İş mantığını ve veri işleme işlemlerini rotalardan ayırarak kodun daha düzenli ve yönetilebilir olmasını sağlar. Kontrolörler, rotaların sadece yönlendirme yapmasını ve iş mantığının ayrı bir yerde tutulmasını sağlar.
