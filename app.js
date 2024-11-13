@@ -1,48 +1,38 @@
-const express = require('express'); // Express.js framework'ünü dahil eder.
-const path = require('path'); // Node.js'in path modülünü dahil eder.
-const bodyParser = require('body-parser'); // body-parser paketini dahil eder.
-const app = express(); // Yeni bir Express uygulaması oluşturur.
-const port = 3000; // Uygulamanın çalışacağı portu belirler.
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const path = require('path');
+const authRoutes = require('./routes/authRoutes');
+const mainRoutes = require('./routes/mainRoutes');
 
-// Middleware: İstekleri loglama
-const requestLogger = (req, res, next) => {
-  console.log(`${req.method} ${req.url}`); // İstek metodunu ve URL'yi konsola yazdırır.
-  next(); // Bir sonraki middleware fonksiyonuna geçiş yapar.
-};
+const app = express();
 
-// Middleware: Kimlik doğrulama (örnek)
-const authenticate = (req, res, next) => {
-  const auth = req.headers.authorization; // İstek başlıklarından Authorization başlığını alır.
-  if (auth === 'secret-token') { // Authorization başlığı 'secret-token' ise
-    next(); // Bir sonraki middleware fonksiyonuna geçiş yapar.
-  } else {
-    res.status(401).send('Unauthorized'); // Değilse, 401 Unauthorized yanıtı gönderir.
-  }
-};
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-// Pug ayarları
-app.set('views', path.join(__dirname, 'views')); // Pug şablonlarının bulunduğu dizini ayarlar.
-app.set('view engine', 'pug'); // Pug'ı şablon motoru olarak ayarlar.
+// Static Files (e.g., for CSS, JS)
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Static dosyalar için public dizinini kullanma
-app.use(express.static(path.join(__dirname, 'public'))); // Public dizinini static dosyalar için kullanır.
+// View Engine Setup (Pug)
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 
-// body-parser middleware'ini kullanma
-app.use(bodyParser.urlencoded({ extended: true })); // URL-encoded veri için body-parser'ı kullanır.
-app.use(bodyParser.json()); // JSON veri için body-parser'ı kullanır.
+// Routes
+app.use('/auth', authRoutes);
+app.use('/', mainRoutes);
 
-// Middleware'leri kullanma
-app.use(requestLogger); // requestLogger middleware'ini kullanır.
+// MongoDB Connection
+mongoose.connect('mongodb+srv://mobicomtaha:KCNwcp8lX4FnT2iv@routing-app.qvwg2.mongodb.net/?retryWrites=true&w=majority&appName=routing-app')
+  .then(() => {
+    console.log("MongoDB bağlantısı başarılı");
+  })
+  .catch(err => {
+    console.error("MongoDB bağlantı hatası:", err);
+  });
 
-// Rotalar
-const mainRoutes = require('./routes/mainRoutes'); // mainRoutes dosyasını dahil eder.
-const authRoutes = require('./routes/authRoutes'); // authRoutes dosyasını dahil eder.
-app.use('/', mainRoutes); // Ana rotaları kullanır.
-app.use('/auth', authRoutes); // Kimlik doğrulama rotalarını kullanır.
-
-// Kimlik doğrulama gerektiren rotalar
-app.use(authenticate); // authenticate middleware'ini kullanır.
-
-app.listen(port, () => {
-  console.log(`Uygulama http://localhost:${port} adresinde çalışıyor.`); // Sunucunun çalıştığını konsola yazdırır.
+// Start Server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Sunucu ${PORT} portunda çalışıyor...`);
 });

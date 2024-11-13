@@ -1,11 +1,18 @@
-const express = require('express'); // Express.js framework'ünü dahil eder.
-const router = express.Router(); // Yeni bir router nesnesi oluşturur.
-const loginController = require('../controllers/loginController'); // loginController dosyasını dahil eder.
+const express = require('express');
+const router = express.Router();
+const loginController = require('../controllers/loginController');
+const signupController = require('../controllers/signupController');
 
 // Giriş sayfası rotası
-router.get('/login', loginController.loginPage); // GET isteği için /login rotasını tanımlar ve loginPage kontrolör fonksiyonunu çağırır.
+router.get('/login', loginController.loginPage);
 
 // Giriş işlemi rotası
-router.post('/login', loginController.login); // POST isteği için /login rotasını tanımlar ve login kontrolör fonksiyonunu çağırır.
+router.post('/login', loginController.login);
 
-module.exports = router; // Router'ı dışa aktarır.
+// Kayıt sayfası rotası
+router.get('/signup', signupController.signupPage);
+
+// Kayıt işlemi rotası
+router.post('/signup', signupController.signup);
+
+module.exports = router;
