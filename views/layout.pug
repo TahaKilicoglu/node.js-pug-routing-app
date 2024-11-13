@@ -2,12 +2,23 @@ doctype html
 html
   head
     title= title
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    link(rel="stylesheet" href="/css/styles.css")
   body
-    header
-      h1= title
-      nav
-        ul
-          li: a(href='/') Ana Sayfa
-          li: a(href='/about') Hakkında
-          li: a(href='/auth/login') Giriş Yap
-    block content
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
+      a.navbar-brand(href='/') MyApp
+      button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      .collapse.navbar-collapse#navbarNav
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(href='/') Ana Sayfa
+          li.nav-item
+            a.nav-link(href='/about') Hakkında
+          li.nav-item
+            a.nav-link(href='/auth/login') Giriş Yap
+    .container
+      block content
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")

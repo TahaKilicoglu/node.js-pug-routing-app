@@ -1,13 +1,19 @@
 extends layout
 
 block content
-  h2 Giriş Yap
-  form(action="/auth/login" method="post")
-    div
-      label(for="username") Kullanıcı Adı:
-      input(type="text" name="username" id="username" required)
-    div
-      label(for="password") Şifre:
-      input(type="password" name="password" id="password" required)
-    div
-      button(type="submit") Giriş Yap
+  .d-flex.justify-content-center.align-items-center.min-vh-100
+    .col-md-6
+      .card
+        .card-body
+          h2.text-center Giriş Yap
+          if error
+            .alert.alert-danger
+              p= error
+          form(action="/auth/login" method="post")
+            .form-group
+              label(for="username") Kullanıcı Adı:
+              input.form-control.form-control-sm(type="text" name="username" id="username" required)
+            .form-group
+              label(for="password") Şifre:
+              input.form-control.form-control-sm(type="password" name="password" id="password" required)
+            button.btn.btn-primary.btn-block(type="submit") Giriş Yap
