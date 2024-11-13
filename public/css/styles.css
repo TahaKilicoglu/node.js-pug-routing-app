@@ -1,0 +1,10 @@
+body {
+    padding-top: 56px; /* Navbar'ın üstte yer kaplaması nedeniyle içeriklerin aşağıda başlamasını sağlar */
+    margin: 0; /* Varsayılan margin'i sıfırlar */
+    overflow: hidden; /* Sayfanın kaydırılmasını engeller */
+  }
+  
+  html, body {
+    height: 100%; /* HTML ve body elemanlarının yüksekliğini %100 yapar */
+  }
+  

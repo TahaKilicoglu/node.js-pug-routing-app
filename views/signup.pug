@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  .d-flex.justify-content-center.align-items-center.min-vh-100
+    .col-md-6
+      .card
+        .card-body
+          h2.text-center Kayıt Ol
+          if error
+            .alert.alert-danger
+              p= error
+          form(action="/auth/signup" method="post")
+            .form-group
+              label(for="firstName") Ad:
+              input.form-control.form-control-sm(type="text" name="firstName" id="firstName" required)
+            .form-group
+              label(for="lastName") Soyad:
+              input.form-control.form-control-sm(type="text" name="lastName" id="lastName" required)
+            .form-group
+              label(for="email") E-posta:
+              input.form-control.form-control-sm(type="email" name="email" id="email" required)
+            .form-group
+              label(for="username") Kullanıcı Adı:
+              input.form-control.form-control-sm(type="text" name="username" id="username" required)
+            .form-group
+              label(for="password") Şifre:
+              input.form-control.form-control-sm(type="password" name="password" id="password" required)
+            button.btn.btn-primary.btn-block(type="submit") Kayıt Ol

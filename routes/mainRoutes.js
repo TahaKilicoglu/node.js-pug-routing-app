@@ -1,11 +1,11 @@
-const express = require('express'); // Express.js framework'ünü dahil eder.
-const router = express.Router(); // Yeni bir router nesnesi oluşturur.
-const mainController = require('../controllers/mainController'); // mainController dosyasını dahil eder.
+const express = require('express');
+const router = express.Router();
+const mainController = require('../controllers/mainController');
 
 // Ana sayfa rotası
-router.get('/', mainController.home); // GET isteği için ana sayfa rotasını tanımlar ve home kontrolör fonksiyonunu çağırır.
+router.get('/', mainController.home);
 
 // Hakkında sayfası rotası
-router.get('/about', mainController.about); // GET isteği için hakkında sayfası rotasını tanımlar ve about kontrolör fonksiyonunu çağırır.
+router.get('/about', mainController.about);
 
-module.exports = router; // Router'ı dışa aktarır.
+module.exports = router;
