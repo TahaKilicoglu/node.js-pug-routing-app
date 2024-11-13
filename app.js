@@ -24,6 +24,9 @@ const authenticate = (req, res, next) => {
 app.set('views', path.join(__dirname, 'views')); // Pug şablonlarının bulunduğu dizini ayarlar.
 app.set('view engine', 'pug'); // Pug'ı şablon motoru olarak ayarlar.
 
+// Static dosyalar için public dizinini kullanma
+app.use(express.static(path.join(__dirname, 'public'))); // Public dizinini static dosyalar için kullanır.
+
 // body-parser middleware'ini kullanma
 app.use(bodyParser.urlencoded({ extended: true })); // URL-encoded veri için body-parser'ı kullanır.
 app.use(bodyParser.json()); // JSON veri için body-parser'ı kullanır.
